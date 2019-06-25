@@ -143,8 +143,9 @@ class DeepNetTrainer(object):
                         if self.use_gpu:
                             with torch.no_grad():    
                                 X, Y = Variable(X.cuda(), volatile=True), Variable(Y.cuda(), volatile=True)
-                                else:
-                                    X, Y = Variable(X, volatile=True), Variable(Y, volatile=True)
+                        if self.use_gpu:
+                            with torch.no_grad():          
+                                X, Y = Variable(X, volatile=True), Variable(Y, volatile=True)
 
                         Ypred, loss = self._do_evaluate(X, Y)
 
