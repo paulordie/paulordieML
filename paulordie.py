@@ -140,12 +140,12 @@ class DeepNetTrainer(object):
                         for cb in self.callbacks:
                             cb.on_vbatch_begin(curr_epoch, curr_batch, mb_size)
 
-                        if self.use_gpu:
-                            with torch.no_grad():    
-                                X, Y = Variable(X.cuda(), volatile=True), Variable(Y.cuda(), volatile=True)
-                        if self.use_gpu:
-                            with torch.no_grad():          
-                                X, Y = Variable(X, volatile=True), Variable(Y, volatile=True)
+                        '''if self.use_gpu:'''
+                        with torch.no_grad():    
+                            X, Y = Variable(X.cuda(), requires_grad=True), Variable(Y.cuda(), requires_grad=True)
+                        
+                        
+                            '''X, Y = Variable(X, volatile=True), Variable(Y, volatile=True)'''
 
                         Ypred, loss = self._do_evaluate(X, Y)
 
